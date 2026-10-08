@@ -1,0 +1,36 @@
+== Conflict graph ==
+Exams (vertices): 10, conflicts (edges): 8
+  CS101 (deg 2) -> CS102 CS104
+  CS102 (deg 2) -> CS101 CS103
+  CS103 (deg 2) -> CS102 CS105
+  CS104 (deg 2) -> CS101 CS105
+  CS105 (deg 2) -> CS103 CS104
+  ME201 (deg 2) -> ME202 ME203
+  ME202 (deg 1) -> ME201
+  ME203 (deg 1) -> ME201
+  HU301 (deg 1) -> HU302
+  HU302 (deg 1) -> HU301
+
+== Connected components (DFS) ==
+  Component 1: CS101 CS104 CS105 CS103 CS102
+  Component 2: ME201 ME203 ME202
+  Component 3: HU301 HU302
+BFS conflict-hops from CS101: [0, 1, 2, 1, 2, -1, -1, -1, -1, -1]
+
+== Slot assignment (graph colouring) ==
+Plain First Fit slots used     : 3
+Degree-ordered + components    : 3
+
+== Capacity check per slot (0/1 Knapsack, 120 seats) ==
+  Slot 1: [CS101(50), ME201(45)] | seated 95/120 | deferred: [CS105(36), HU301(40)]
+  Slot 2: [CS103(41), ME202(41), HU302(36)] | seated 118/120 | deferred: [CS104(31), ME203(21)]
+  Slot 3: [CS102(51), CS105(36), ME203(21)] | seated 108/120 | deferred: []
+  Slot 4: [HU301(40), CS104(31)] | seated 71/120 | deferred: []
+
+== Invigilator allocation (DP, 6 per slot) ==
+  Slot 1: CS101=2 ME201=2
+  Slot 2: CS103=2 ME202=2 HU302=2
+  Slot 3: CS102=2 CS105=2 ME203=1
+  Slot 4: HU301=2 CS104=2
+
+Clash-free timetable verified: true
